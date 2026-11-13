@@ -1,0 +1,411 @@
+nizar@MVPNIZAR17:~$ cd ~
+nizar@MVPNIZAR17:~$ mkdir lab2
+nizar@MVPNIZAR17:~$ cd lab2
+nizar@MVPNIZAR17:~/lab2$ pwd
+/home/nizar/lab2
+nizar@MVPNIZAR17:~/lab2$ touch report1.txt report2.txt report3.txt notes.txt photo1.jpg photo2.jpg photo.png
+nizar@MVPNIZAR17:~/lab2$ touch fruits.txt
+nizar@MVPNIZAR17:~/lab2$ printf "apple\nbanana\ncherry\napple\ndate\nbanana\napple\nelderberry\n" > fruits.txt
+nizar@MVPNIZAR17:~/lab2$ touch log.txt
+nizar@MVPNIZAR17:~/lab2$ printf "INFO server started\nERROR disk full\nINFO user login\n" > log.txt
+nizar@MVPNIZAR17:~/lab2$ printf "WARNING low memory\nERROR network down\n" >> log.txt
+nizar@MVPNIZAR17:~/lab2$ printf "INFO user logout\nERROR disk full\n" >> log.txt
+nizar@MVPNIZAR17:~/lab2$ ls
+fruits.txt  notes.txt  photo1.jpg  report1.txt  report3.txt
+log.txt     photo.png  photo2.jpg  report2.txt
+nizar@MVPNIZAR17:~/lab2$ cat -n fruits.txt
+     1  apple
+     2  banana
+     3  cherry
+     4  apple
+     5  date
+     6  banana
+     7  apple
+     8  elderberry
+nizar@MVPNIZAR17:~/lab2$ ls *.txt
+fruits.txt  log.txt  notes.txt  report1.txt  report2.txt  report3.txt
+nizar@MVPNIZAR17:~/lab2$ ls report?.txt
+report1.txt  report2.txt  report3.txt
+nizar@MVPNIZAR17:~/lab2$ ls photo*
+photo.png  photo1.jpg  photo2.jpg
+nizar@MVPNIZAR17:~/lab2$ ls report[12].txt
+report1.txt  report2.txt
+nizar@MVPNIZAR17:~/lab2$ ls *.jpg
+photo1.jpg  photo2.jpg
+nizar@MVPNIZAR17:~/lab2$ mkdir backup
+nizar@MVPNIZAR17:~/lab2$ cp report*.txt backup
+nizar@MVPNIZAR17:~/lab2$ ls backup
+report1.txt  report2.txt  report3.txt
+nizar@MVPNIZAR17:~/lab2$ grep apple fruits.txt
+apple
+apple
+apple
+nizar@MVPNIZAR17:~/lab2$ grep -c apple fruits.txt
+3
+nizar@MVPNIZAR17:~/lab2$ grep ERROR log.txt
+ERROR disk full
+ERROR network down
+ERROR disk full
+nizar@MVPNIZAR17:~/lab2$ grep -n ERROR log.txt
+2:ERROR disk full
+5:ERROR network down
+7:ERROR disk full
+nizar@MVPNIZAR17:~/lab2$ grep -v INFO log.txt
+ERROR disk full
+WARNING low memory
+ERROR network down
+ERROR disk full
+nizar@MVPNIZAR17:~/lab2$ grep "disk full" log.txt
+ERROR disk full
+ERROR disk full
+nizar@MVPNIZAR17:~/lab2$ grep -r ERROR .
+./log.txt:ERROR disk full
+./log.txt:ERROR network down
+./log.txt:ERROR disk full
+nizar@MVPNIZAR17:~/lab2$ pwd
+/home/nizar/lab2
+nizar@MVPNIZAR17:~/lab2$ mkdir -p backup/old
+nizar@MVPNIZAR17:~/lab2$ touch backup/old/report9.txt
+nizar@MVPNIZAR17:~/lab2$ find . -name "report*"
+./report3.txt
+./report1.txt
+./report2.txt
+./backup/old/report9.txt
+./backup/report3.txt
+./backup/report1.txt
+./backup/report2.txt
+nizar@MVPNIZAR17:~/lab2$ find . -name "*.jpg"
+./photo2.jpg
+./photo1.jpg
+nizar@MVPNIZAR17:~/lab2$ find . -type d
+.
+./backup
+./backup/old
+nizar@MVPNIZAR17:~/lab2$ sort fruits.txt
+apple
+apple
+apple
+banana
+banana
+cherry
+date
+elderberry
+nizar@MVPNIZAR17:~/lab2$ sort fruits.txt | uniq
+apple
+banana
+cherry
+date
+elderberry
+nizar@MVPNIZAR17:~/lab2$ sort fruits.txt | uniq -c
+      3 apple
+      2 banana
+      1 cherry
+      1 date
+      1 elderberry
+nizar@MVPNIZAR17:~/lab2$ sort fruits.txt | uniq -c | sort -nr
+      3 apple
+      2 banana
+      1 elderberry
+      1 date
+      1 cherry
+nizar@MVPNIZAR17:~/lab2$ cut -d " " -f1 log.txt | sort | uniq -c
+      3 ERROR
+      3 INFO
+      1 WARNING
+nizar@MVPNIZAR17:~/lab2$ grep ERROR log.txt | wc -l
+3
+nizar@MVPNIZAR17:~/lab2$ grep ERROR log.txt | sort | uniq -c
+      2 ERROR disk full
+      1 ERROR network down
+nizar@MVPNIZAR17:~/lab2$ ls -l notes.txt
+-rw-r--r-- 1 nizar nizar 0 Nov 13 20:20 notes.txt
+nizar@MVPNIZAR17:~/lab2$ touch secret.txt
+nizar@MVPNIZAR17:~/lab2$ chmod 600 secret.txt
+nizar@MVPNIZAR17:~/lab2$ ls -l secret.txt
+-rw------- 1 nizar nizar 0 Nov 13 21:44 secret.txt
+nizar@MVPNIZAR17:~/lab2$ chmod 644 secret.txt
+nizar@MVPNIZAR17:~/lab2$ ls -l secret.txt
+-rw-r--r-- 1 nizar nizar 0 Nov 13 21:44 secret.txt
+nizar@MVPNIZAR17:~/lab2$ echo '#!/bin/bash' > hello.sh
+nizar@MVPNIZAR17:~/lab2$ echo 'echo Hello from my first script' >> hello.sh
+nizar@MVPNIZAR17:~/lab2$ cat hello.sh
+#!/bin/bash
+echo Hello from my first script
+nizar@MVPNIZAR17:~/lab2$ ./hello.sh
+-bash: ./hello.sh: Permission denied
+nizar@MVPNIZAR17:~/lab2$ ls -l hello.sh
+-rw-r--r-- 1 nizar nizar 44 Nov 13 21:47 hello.sh
+nizar@MVPNIZAR17:~/lab2$ chmod +x hello.sh
+nizar@MVPNIZAR17:~/lab2$ ls -l hello.sh
+-rwxr-xr-x 1 nizar nizar 44 Nov 13 21:47 hello.sh
+nizar@MVPNIZAR17:~/lab2$ ./hello.sh
+Hello from my first script
+nizar@MVPNIZAR17:~/lab2$ ~/lab2
+-bash: /home/nizar/lab2: Is a directory
+nizar@MVPNIZAR17:~/lab2$ touch scores.txt
+nizar@MVPNIZAR17:~/lab2$ printf "ali 12\nsara 15\nali 18\nsara 9\nali 14\n" > scores.txt
+nizar@MVPNIZAR17:~/lab2$ grep ali scores.txt
+ali 12
+ali 18
+ali 14
+nizar@MVPNIZAR17:~/lab2$ grep -c ali scores.txt
+3
+nizar@MVPNIZAR17:~/lab2$ cut -d " " -f1 scores.txt | sort | uniq -c
+      3 ali
+      2 sara
+nizar@MVPNIZAR17:~/lab2$ echo '#!/bin/bash' > count.sh
+nizar@MVPNIZAR17:~/lab2$ echo 'wc -l scores.txt' >> count.sh
+nizar@MVPNIZAR17:~/lab2$ cat count.sh
+#!/bin/bash
+wc -l scores.txt
+nizar@MVPNIZAR17:~/lab2$ chmod +x count.sh
+nizar@MVPNIZAR17:~/lab2$ ./count.sh
+5 scores.txt
+nizar@MVPNIZAR17:~/lab2$ 5 scores.txt
+5: command not found
+nizar@MVPNIZAR17:~/lab2$ find ~/lab2 -name "*.sh"
+/home/nizar/lab2/hello.sh
+/home/nizar/lab2/count.sh
+nizar@MVPNIZAR17:~/lab2$ echo "grep -c ali scores.txt" > count.sh
+nizar@MVPNIZAR17:~/lab2$ ./count.sh
+3
+nizar@MVPNIZAR17:~/lab2$ mkdir ~/detective
+nizar@MVPNIZAR17:~/lab2$ cd ~/detective
+nizar@MVPNIZAR17:~/detective$ printf "ali login none\nsara download report.pdf\nmohamed logout none\nali download image.jpg\nsara login none\nmohamed download data.zip\nali logout none\nsara download notes.pdf\nmohamed login none\nali download video.mp4\n" > access.log
+nizar@MVPNIZAR17:~/detective$ cat -n access.log
+     1  ali login none
+     2  sara download report.pdf
+     3  mohamed logout none
+     4  ali download image.jpg
+     5  sara login none
+     6  mohamed download data.zip
+     7  ali logout none
+     8  sara download notes.pdf
+     9  mohamed login none
+    10  ali download video.mp4
+nizar@MVPNIZAR17:~/detective$ touch a1.log a2.log a3.log b1.log b2.log
+nizar@MVPNIZAR17:~/detective$ ls a?.log
+a1.log  a2.log  a3.log
+nizar@MVPNIZAR17:~/detective$ grep download access.log
+sara download report.pdf
+ali download image.jpg
+mohamed download data.zip
+sara download notes.pdf
+ali download video.mp4
+nizar@MVPNIZAR17:~/detective$ grep -c download access.log
+5
+nizar@MVPNIZAR17:~/detective$ grep "^ali " access.log
+ali login none
+ali download image.jpg
+ali logout none
+ali download video.mp4
+nizar@MVPNIZAR17:~/detective$ cut -d " " -f1 access.log | sort | uniq -c | sort -nr
+      4 ali
+      3 sara
+      3 mohamed
+nizar@MVPNIZAR17:~/detective$ grep -vc login access.log
+7
+nizar@MVPNIZAR17:~/detective$ find ~/detective -name "*.log"
+/home/nizar/detective/access.log
+/home/nizar/detective/b2.log
+/home/nizar/detective/b1.log
+/home/nizar/detective/a1.log
+/home/nizar/detective/a2.log
+/home/nizar/detective/a3.log
+nizar@MVPNIZAR17:~/detective$ chmod 600 access.log
+nizar@MVPNIZAR17:~/detective$ ls -l access.log
+-rw------- 1 nizar nizar 207 Nov 13 22:29 access.log
+nizar@MVPNIZAR17:~/detective$ echo '#!/bin/bash' > report.sh
+nizar@MVPNIZAR17:~/detective$ echo 'wc -l access.log' >> report.sh
+nizar@MVPNIZAR17:~/detective$ cat report.sh
+#!/bin/bash
+wc -l access.log
+nizar@MVPNIZAR17:~/detective$ chmod +x report.sh
+nizar@MVPNIZAR17:~/detective$ ./report.sh
+10 access.log
+nizar@MVPNIZAR17:~/detective$ ls -l
+total 8
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 a1.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 a2.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 a3.log
+-rw------- 1 nizar nizar 207 Nov 13 22:29 access.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 b1.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 b2.log
+-rwxr-xr-x 1 nizar nizar  29 Nov 13 22:34 report.sh
+nizar@MVPNIZAR17:~/detective$ cut -d " " -f1 access.log | sort | uniq -c | sort -nr | head -n 1
+      4 ali
+nizar@MVPNIZAR17:~/detective$ cd ~/detective
+nizar@MVPNIZAR17:~/detective$ ls -l > ~/submission2.txt
+nizar@MVPNIZAR17:~/detective$ history | tail -n 50 >> ~/submission2.txt
+nizar@MVPNIZAR17:~/detective$ nano ~/submission2.txt
+
+nizar@MVPNIZAR17:~/detective$ cat ~/submission2.txt
+total 8
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 a1.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 a2.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 a3.log
+-rw------- 1 nizar nizar 207 Nov 13 22:29 access.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 b1.log
+-rw-r--r-- 1 nizar nizar   0 Nov 13 22:30 b2.log
+-rwxr-xr-x 1 nizar nizar  29 Nov 13 22:34 report.sh
+  331  ls -l secret.txt
+  332  chmod 644 secret.txt
+  333  ls -l secret.txt
+  334  echo '#!/bin/bash' > hello.sh
+  335  echo 'echo Hello from my first script' >> hello.sh
+  336  cat hello.sh
+  337  ./hello.sh
+  338  ls -l hello.sh
+  339  chmod +x hello.sh
+  340  ls -l hello.sh
+  341  ./hello.sh
+  342  ~/lab2
+  343  touch scores.txt
+  344  printf "ali 12\nsara 15\nali 18\nsara 9\nali 14\n" > scores.txt
+  345  grep ali scores.txt
+  346  grep -c ali scores.txt
+  347  cut -d " " -f1 scores.txt | sort | uniq -c
+  348  echo '#!/bin/bash' > count.sh
+  349  echo 'wc -l scores.txt' >> count.sh
+  350  cat count.sh
+  351  chmod +x count.sh
+  352  ./count.sh
+  353  5 scores.txt
+  354  find ~/lab2 -name "*.sh"
+  355  echo "grep -c ali scores.txt" > count.sh
+  356  ./count.sh
+  357  mkdir ~/detective
+  358  cd ~/detective
+  359  printf "ali login none\nsara download report.pdf\nmohamed logout none\nali download image.jpg\nsara login none\nmohamed download data.zip\nali logout none\nsara download notes.pdf\nmohamed login none\nali download video.mp4\n" > access.log
+  360  cat -n access.log
+  361  touch a1.log a2.log a3.log b1.log b2.log
+  362  ls a?.log
+  363  grep download access.log
+  364  grep -c download access.log
+  365  grep "^ali " access.log
+  366  cut -d " " -f1 access.log | sort | uniq -c | sort -nr
+  367  grep -vc login access.log
+  368  find ~/detective -name "*.log"
+  369  chmod 600 access.log
+  370  ls -l access.log
+  371  echo '#!/bin/bash' > report.sh
+  372  echo 'wc -l access.log' >> report.sh
+  373  cat report.sh
+  374  chmod +x report.sh
+  375  ./report.sh
+  376  ls -l
+  377  cut -d " " -f1 access.log | sort | uniq -c | sort -nr | head -n 1
+  378  cd ~/detective
+  379  ls -l > ~/submission2.txt
+  380  history | tail -n 50 >> ~/submission2.txt
+
+========================================
+       LINUX & SHELL LAB 2
+              ANSWERS
+========================================
+
+PART 0: RECAP AND SETUP
+----------------------------------------
+
+Q1. pwd
+
+Q2. mkdir lab2
+
+Q3. echo "hi" > a.txt
+
+Q4. echo "bye" >> a.txt
+
+
+========================================
+PART 1: WILDCARDS
+----------------------------------------
+
+Q1. ls *.jpg
+
+Q2. The ? wildcard matches exactly one character.
+    photo1.jpg matches the pattern, but photo.png
+    does not have the .jpg extension.
+
+Q3. ls report[13].txt
+
+
+========================================
+PART 2: SEARCHING WITH GREP
+----------------------------------------
+
+Q1. 1 line.
+
+Q2. grep -v ERROR log.txt
+
+Q3. grep -i error log.txt ignores uppercase
+    and lowercase differences, so it can find
+    ERROR even when searching for lowercase error.
+
+
+========================================
+PART 3: FINDING FILES
+----------------------------------------
+
+Q1. find ~/lab2 -type f -name "*.txt"
+
+Q2. find ~/lab2 -mindepth 1 -type d
+
+
+========================================
+PART 4: PIPES AND FILTERS
+----------------------------------------
+
+Q1. 5 different fruits.
+
+Q2. Apple appears most often, 3 times.
+
+Q3. ERROR disk full
+
+
+========================================
+PART 5: PERMISSIONS AND SCRIPT
+----------------------------------------
+
+Q1. The group can only read the file.
+
+Q2. 755
+
+Q3. 600
+
+Q4. Execute permission (x) was added to
+    the permission string.
+
+Q5. chmod 700 hello.sh
+
+
+========================================
+PART 6: MINI CHALLENGE
+----------------------------------------
+
+Task 1:
+printf "ali 12\nsara 15\nali 18\nsara 9\nali 14\n" > scores.txt
+
+Task 2:
+grep "ali" scores.txt
+grep -c "ali" scores.txt
+
+Answer: 3 lines.
+
+Task 3:
+cut -d " " -f1 scores.txt | sort | uniq -c
+
+Answer:
+3 ali
+2 sara
+
+Task 4:
+printf '#!/bin/bash\nwc -l scores.txt\n' > count.sh
+chmod +x count.sh
+./count.sh
+
+Answer: 5 lines.
+
+Task 5:
+find ~/lab2 -name "*.sh"
+
+============================================================================================================================================
